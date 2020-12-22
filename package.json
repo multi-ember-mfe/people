@@ -51,6 +51,7 @@
     "node": "6.* || 8.* || >= 10.*"
   },
   "dependencies": {
-    "single-spa-ember": "^0.2.0"
+    "single-spa-ember": "^0.2.0",
+    "single-spa-leaked-globals": "^1.0.0"
   }
 }

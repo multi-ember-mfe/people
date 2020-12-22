@@ -3,6 +3,9 @@ import Resolver from './resolver';
 import loadInitializers from 'ember-load-initializers';
 import config from './config/environment';
 
+import singleSpaEmber from 'single-spa-ember';
+import singleSpaLeakedGlobals from 'single-spa-leaked-globals';
+
 const App = Application.extend({
   modulePrefix: config.modulePrefix,
   podModulePrefix: config.podModulePrefix,
@@ -13,7 +16,6 @@ loadInitializers(App, config.modulePrefix);
 
 export default App;
 
-import singleSpaEmber from 'single-spa-ember';
 
 const emberLifecycles = singleSpaEmber({
   App,
@@ -23,6 +25,20 @@ const emberLifecycles = singleSpaEmber({
   }
 });
 
-export const bootstrap = emberLifecycles.bootstrap;
-export const mount = emberLifecycles.mount;
-export const unmount = emberLifecycles.unmount;
+const leakedGlobalsLifecycles = singleSpaLeakedGlobals({
+  globalVariableNames: ['Ember'],
+})
+export const bootstrap = [
+  leakedGlobalsLifecycles.bootstrap,
+  emberLifecycles.bootstrap,
+]
+
+export const mount = [
+  leakedGlobalsLifecycles.mount,
+  emberLifecycles.mount,
+]
+export const unmount = [
+  leakedGlobalsLifecycles.mount,
+  emberLifecycles.unmount,
+]
+

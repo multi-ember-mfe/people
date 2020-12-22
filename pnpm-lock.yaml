@@ -1,5 +1,6 @@
 dependencies:
   single-spa-ember: 0.2.0
+  single-spa-leaked-globals: 1.0.0
 devDependencies:
   '@ember/jquery': 0.5.2
   '@ember/optional-features': 0.6.4
@@ -9365,6 +9366,10 @@ packages:
     dev: false
     resolution:
       integrity: sha1-IuZjZ2AcqsKWyFEwg+EKQM9//fA=
+  /single-spa-leaked-globals/1.0.0:
+    dev: false
+    resolution:
+      integrity: sha512-OeGsOqGUwMqbLi5xHy+O4ITdsJ7X9z0ZwmlLYJrNA8lXfDxOL0keFdNYNVx+t+xnTsVQ9bvU188ZAZxYmZ4gjg==
   /slash/1.0.0:
     dev: true
     engines:
@@ -10897,4 +10902,5 @@ specifiers:
   loader.js: ^4.7.0
   qunit-dom: ^0.7.1
   single-spa-ember: ^0.2.0
+  single-spa-leaked-globals: ^1.0.0
   surge: ^0.21.7
