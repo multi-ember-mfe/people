@@ -12,11 +12,14 @@
   },
   "scripts": {
     "build": "ember build -prod",
+    "watch": "ember build -w",
     "lint:hbs": "ember-template-lint .",
     "lint:js": "eslint .",
     "start": "ember serve",
     "test": "ember test",
-    "deploy": "npm run build && surge dist/ mem-people.surge.sh"
+    "deploy": "npm run build && surge dist/ mem-people.surge.sh",
+    "serve": "servor dist index.html 4200",
+    "dev": "run-p serve watch"
   },
   "devDependencies": {
     "@ember/jquery": "^0.5.2",
@@ -44,6 +47,7 @@
     "ember-source": "~3.4.0",
     "eslint-plugin-ember": "^5.2.0",
     "loader.js": "^4.7.0",
+    "npm-run-all": "^4.1.5",
     "qunit-dom": "^0.7.1",
     "surge": "^0.21.7"
   },
