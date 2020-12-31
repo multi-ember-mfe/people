@@ -28,7 +28,10 @@ export default function singleSpaEmber(userOpts) {
 }
 
 function bootstrap() {
-  return Promise.resolve();
+  return Promise.resolve().then(() => {
+    window.peopleLoader = window.loader;
+    window.peopleEmber = window.Ember;
+  });
 }
 
 function mount(opts) {
@@ -36,26 +39,9 @@ function mount(opts) {
     .resolve()
     .then(() => {
       
-      debugger; // eslint-disable-line
-      window.__people = window.__people || {};
-      if(window.__people.Ember) {
-        const { Ember } = window.__people;
-        window.Ember = Ember;
-      }
-      function loadApp(appName,appUrl) {
-        const scriptEl = document.createElement('script');
-        scriptEl.src = appUrl;
-        scriptEl.async = true;
-        scriptEl.onload = () => {
-          window.require(appName+'/app');
-        }
-        //scriptEl.onerror = reject;
-        document.head.appendChild(scriptEl);
-      }
-      if(window.__sspaEmber.people) {
-        const { appUrl, vendorUrl } = window.__sspaEmber.people; 
-        loadApp('people', appUrl);
-      }
+      window.loader = window.peopleLoader;
+      window.Ember = window.peopleEmber;
+      
       opts.applicationInstance = opts.App.create(opts.createOpts);
     })
 }
@@ -67,16 +53,8 @@ function unmount(opts) {
       opts.applicationInstance.destroy();
       opts.applicationInstance = null;
 
-      window.__people = {
-        Ember: window.Ember,
-      };
       delete window.Ember;
-      document.querySelectorAll('script').forEach(s =>  {
-        const { appUrl , vendorUrl } = window.__sspaEmber.people;
-        if(s.src === appUrl || s.src === vendorUrl) {
-          document.head.removeChild(s);
-        }
-      })
+      
     });
 }
 
