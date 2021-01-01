@@ -1,0 +1,51 @@
+<h3>{{model.name}}</h3>
+<table>
+  <tr>
+    <td>Height</td>
+    <td>{{model.height}}</td>
+  </tr>
+  <tr>
+    <td>Mass:</td>
+    <td>{{model.mass}}</td>
+  </tr>
+  <tr>
+    <td>Hair Color:</td>
+    <td>{{model.hair_color}}</td>
+  </tr>
+  <tr>
+    <td>Skin Color:</td>
+    <td>{{model.skin_color}}</td>
+  </tr>
+  <tr>
+    <td>Eye Color:</td>
+    <td>{{model.eye_color}}</td>
+  </tr>
+  <tr>
+    <td>Birth Year:</td>
+    <td>{{model.birth_year}}</td>
+  </tr>
+  <tr>
+    <td>Gender:</td>
+    <td>{{model.gender}}</td>
+  </tr>
+  <tr>
+    <td>Home world:</td>
+    <td>{{link-to-page  items=model.homeworld }}</td>
+  </tr>
+  <tr>
+    <td>Films:</td>
+    <td>{{link-to-page  items=model.films  }} </td>
+  </tr>
+  <tr>
+    <td>Species:</td>
+    <td>{{link-to-page items=model.species}} </td>
+  </tr>
+  <tr>
+    <td>Vehicles:</td>
+    <td>{{link-to-page items=model.vehicles}} </td>
+  </tr>
+  <tr>
+    <td>Starships:</td>
+    <td>{{link-to-page items=model.starships}}</td>
+  </tr>
+  </table>

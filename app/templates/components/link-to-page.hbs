@@ -1,0 +1,9 @@
+{{#async-await this.links as |links|}}
+{{#each links as |i|}}
+  <p>
+  <a href={{ i.link }}>{{i.text}}</a>
+  </p>
+{{/each}}
+{{else}}
+  <p>Loading...</p>
+{{/async-await}}

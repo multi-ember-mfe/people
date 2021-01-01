@@ -1,0 +1,12 @@
+<div class="grid">
+  <div class="left-panel">
+<ul class="list p-8">
+  {{#each model.people as |p|}}
+    <li>{{#link-to "index.show" p}}{{p.name}}{{/link-to}}</li>
+  {{/each}}
+</ul>
+  </div>
+  <div class="right-panel">
+    {{outlet}}
+  </div>
+</div>

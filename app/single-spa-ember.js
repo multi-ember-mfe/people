@@ -27,10 +27,11 @@ export default function singleSpaEmber(userOpts) {
   };
 }
 
-function bootstrap() {
+function bootstrap(opts) {
   return Promise.resolve().then(() => {
     window.peopleLoader = window.loader;
     window.peopleEmber = window.Ember;
+    window.__peopleRequire = window[opts.loaderAliases.require];
   });
 }
 
@@ -38,10 +39,9 @@ function mount(opts) {
   return Promise
     .resolve()
     .then(() => {
-      
       window.loader = window.peopleLoader;
       window.Ember = window.peopleEmber;
-      
+      window.require = window.__peopleRequire;
       opts.applicationInstance = opts.App.create(opts.createOpts);
     })
 }
@@ -52,7 +52,6 @@ function unmount(opts) {
     .then(() => {
       opts.applicationInstance.destroy();
       opts.applicationInstance = null;
-
       delete window.Ember;
       
     });

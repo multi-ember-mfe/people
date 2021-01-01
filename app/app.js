@@ -4,7 +4,6 @@ import loadInitializers from 'ember-load-initializers';
 import config from './config/environment';
 
 import singleSpaEmber from './single-spa-ember';
-import singleSpaLeakedGlobals from 'single-spa-leaked-globals';
 
 const App = Application.extend({
   modulePrefix: config.modulePrefix,
@@ -14,10 +13,12 @@ const App = Application.extend({
 
 loadInitializers(App, config.modulePrefix);
 
-window.loader.noConflict({
+const loaderAliases = {
   require: 'peopleRequire',
   requirejs: 'peopleRequireJS'
-});
+};
+
+window.loader.noConflict(loaderAliases);
 
 export default App;
 
@@ -27,23 +28,9 @@ const emberLifecycles = singleSpaEmber({
   appName: 'people',
   createOpts: {
     rootElement: '#people',
-  }
+  },
+  loaderAliases
 });
 
-const leakedGlobalsLifecycles = singleSpaLeakedGlobals({
-  globalVariableNames: ['Ember', 'loader'],
-})
+export const { bootstrap, mount, unmount } = emberLifecycles;
 
-
-export const bootstrap = [
-  leakedGlobalsLifecycles.bootstrap,
-  emberLifecycles.bootstrap
-]
-export const mount = [
-  leakedGlobalsLifecycles.mount,
-  emberLifecycles.mount,
-]
-export const unmount = [
-  leakedGlobalsLifecycles.mount,
-  emberLifecycles.unmount,
-]
